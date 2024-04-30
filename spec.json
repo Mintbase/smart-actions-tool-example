@@ -99,6 +99,15 @@
               "type": "string"
             },
             "description": "The amount of the input token to swap."
+          },
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The account to perform the swap."
           }
         ],
         "responses": {
