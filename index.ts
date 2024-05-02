@@ -10,8 +10,11 @@ new Elysia()
         const tokenMetadata = await ftGetTokenMetadata(_tokenIn[0].id);
         return tokenMetadata;
     })
-    // http://localhost:3300/swap/lonk/dragon/1/microchipgnu.near
-    .get("/swap/:tokenIn/:tokenOut/:quantity/:accountId", async ({ params: { tokenIn, tokenOut, quantity, accountId } }) => {
+    // http://localhost:3300/swap/lonk/dragon/1
+    .get("/swap/:tokenIn/:tokenOut/:quantity", async ({ params: { tokenIn, tokenOut, quantity }, headers }) => {
+        const mbMetadata = JSON.parse(headers["mb-metadata"] || "{}")
+        const accountId = mbMetadata?.accountData?.accountId
+
         const { simplePools } = await fetchAllPools();
 
         const _tokenIn = await searchToken(tokenIn)
@@ -27,7 +30,7 @@ new Elysia()
         if (!tokenInId || !tokenOutId) {
             return "Token not found"
         }
-        
+
         const tokenInData = await ftGetTokenMetadata(tokenInId);
         const tokenOutData = await ftGetTokenMetadata(tokenOutId);
 
@@ -44,7 +47,7 @@ new Elysia()
             amountIn: quantity,
             swapTodos,
             slippageTolerance: 0.01,
-            AccountId: accountId,
+            AccountId: accountId
         });
 
         return transactionsRef;
