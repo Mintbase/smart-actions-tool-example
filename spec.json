@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Ref Finance API",
     "description": "API for interacting with Ref Finance operations including token metadata retrieval and token swaps.",
@@ -99,15 +99,6 @@
               "type": "string"
             },
             "description": "The amount of the input token to swap."
-          },
-          {
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The account to perform the swap."
           }
         ],
         "responses": {
