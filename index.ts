@@ -54,7 +54,7 @@ new Elysia()
 
         return transactionsRef;
     })
-    .get("/.well-known/mb-ai-plugin.json", async () => {
+    .get("/.well-known/ai-plugin.json", async () => {
         return Bun.file("spec.json").text();
     })
     .listen(3300)
