@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: bun
+    env: docker
+    repo: https://github.com/Mintbase/smart-actions-tool-example
+    plan: starter
+    autoDeploy: false

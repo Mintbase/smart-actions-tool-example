@@ -1,10 +1,12 @@
 import { ftGetTokenMetadata, init_env, type EstimateSwapView, estimateSwap, fetchAllPools, instantSwap, type Transaction, ftGetTokensMetadata, getTotalPools, getGlobalWhitelist } from "@ref-finance/ref-sdk";
 import { Elysia } from "elysia"
 import { searchToken } from "./util";
+import { swagger } from '@elysiajs/swagger'
 
 init_env('mainnet');
 
 new Elysia()
+    .use(swagger())
     .get("/:token", async ({ params: { token } }) => {
         const _tokenIn = await searchToken(token)
         const tokenMetadata = await ftGetTokenMetadata(_tokenIn[0].id);
@@ -13,7 +15,7 @@ new Elysia()
     // http://localhost:3300/swap/lonk/dragon/1
     .get("/swap/:tokenIn/:tokenOut/:quantity", async ({ params: { tokenIn, tokenOut, quantity }, headers }) => {
         const mbMetadata = JSON.parse(headers["mb-metadata"] || "{}")
-        const accountId = mbMetadata?.accountData?.accountId
+        const accountId = mbMetadata?.accountData?.accountId || "near"
 
         const { simplePools } = await fetchAllPools();
 

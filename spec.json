@@ -10,6 +10,9 @@
       "url": "http://localhost:3300"
     }
   ],
+  "x-mb": {
+    "account-id": "mintbase.near"
+  },
   "paths": {
     "/{token}": {
       "get": {
